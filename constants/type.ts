@@ -63,4 +63,5 @@ export interface CreateUserParam{
     firstName:string | null,
     lastName:string | null,
     photo:string,
+    Subscribed:string
 }
