@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Recursive } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs'
+import Navbar from "@/components/shared/Navbar";
+import Provider from "@/components/shared/Provider";
+import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const recursive = Recursive({ subsets: ["latin"] });
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +21,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={recursive.className}>
+      <Navbar/>
+        <div className="flex flex-col min-h-full">
+        <Provider>
+        {children}
+        </Provider>
+        </div>
+        <Toaster/>
+        </body>
     </html>
+    </ClerkProvider>
   );
 }
