@@ -5,7 +5,7 @@ const SubscribeSchema = new Schema({
     stripeId:{type:String,required:true,unique:true},
     totalAmount:{type:String},
     user:{type: Schema.Types.ObjectId, ref:"User"},
-    plan:{tyep:Schema.Types.ObjectId,ref:"Plan"}
+    plan:{type:Schema.Types.ObjectId,ref:"Plan"}
 })
 
 const Subscribe = models.Subscribe || model("Subscribe",SubscribeSchema)
