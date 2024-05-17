@@ -43,7 +43,7 @@ export const CreateSubscriber = async(subscribe:CreateSubscriberParams)=>{
       await connectToDatabase()
       const newSubscriber = await Subscribe.create({
         ...subscribe,
-         Plan:subscribe.planId,
+         plan:subscribe.planId,
          user:subscribe.buyerId
       })
       return JSON.parse(JSON.stringify(newSubscriber))
