@@ -64,3 +64,23 @@ export interface CreateUserParam{
     lastName:string | null,
     photo:string,
 }
+
+export interface CreatePlanParam{
+    plantype:string,
+    Planprice:string,
+}
+
+export type CheckoutSubscribeParams = {
+    planType: string
+    planId: string
+    price: string
+    buyerId: string
+}
+
+export interface CreateSubscriberParams{
+    stripeId: string
+    planId: string
+    buyerId: string
+    totalAmount: string
+    createdAt: Date
+}

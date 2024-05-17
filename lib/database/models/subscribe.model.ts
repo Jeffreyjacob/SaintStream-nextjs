@@ -1,8 +1,13 @@
-import { Schema } from "mongoose";
+import {  Schema, model, models } from "mongoose";
 
 const SubscribeSchema = new Schema({
     createAt:{type:Date,default:Date.now},
     stripeId:{type:String,required:true,unique:true},
     totalAmount:{type:String},
-    UserSubscribing:{type: Schema.Types.ObjectId, ref:"User"}
+    user:{type: Schema.Types.ObjectId, ref:"User"},
+    Plan:{tyep:Schema.Types.ObjectId,ref:"Plan"}
 })
+
+const Subscribe = models.Subscribe || model("Subscribe",SubscribeSchema)
+
+export default Subscribe
