@@ -1,25 +1,32 @@
-import mongoose from 'mongoose';
+import monogoose, { Mongoose } from 'mongoose';
 
+const MONOGODB_URI = process.env.MONOGODB_URI;
 
-const MONGODG_URL = process.env.MONGODB_URL
+interface MongooseConn{
+    conn:Mongoose | null,
+    promise:Promise<Mongoose> | null
+}
+
+let cached:MongooseConn = (global as any).mongoose; 
+if(!cached){
+    cached = (global as any).mongoose = {
+        conn:null,
+        promise:null
+    }
+}
 
 export const connectToDatabase = async ()=>{
-    const connectionState = mongoose.connection.readyState;
-    if(connectionState === 1){
-        console.log("Already connected")
-        return;
-    }
-    if(connectionState == 2){
-        console.log('Connecting....')
-        return;
-    }
-    try{
-        await mongoose.connect(MONGODG_URL!,{
-            dbName:"SaintStream",
-            bufferCommands:false
-        })
-    }catch(error){
-        console.log('Error connecting to database',error)
-        throw new Error("Error connecting to database")
-    }
+    if (cached.conn) return cached.conn;
+   
+    if(!MONOGODB_URI) throw new Error('MONOGODB_URI is missing');
+
+    cached.promise = cached.promise || monogoose.connect(MONOGODB_URI,{
+        dbName:'saintstream',
+        bufferCommands:false,
+        connectTimeoutMS:30000
+    })
+
+    cached.conn = await cached.promise;
+
+    return cached.conn;
 }
