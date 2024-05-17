@@ -24,13 +24,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body className={recursive.className}>
-      <Navbar/>
-        <div className="flex flex-col min-h-full">
-        <Provider>
-        {children}
-        </Provider>
-        </div>
-        <Toaster/>
+          {children}
         </body>
     </html>
     </ClerkProvider>
