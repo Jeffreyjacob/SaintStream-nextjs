@@ -10,6 +10,7 @@ export const CreateUser = async (user:CreateUserParam)=>{
         const newUser = await User.create(user)
         return JSON.parse(JSON.stringify(newUser))
     }catch(error){
-     throw new  Error("Error while creating user" + error)
+        console.log(error)
+        throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
     }
 }
