@@ -35,7 +35,7 @@ const Navbar = () => {
             <div className=' hidden lg:block'>
             <NavItem/>
             </div>
-            <div className='block lg:hidden'>
+            <div className='flex items-center lg:hidden '>
              <MobileNav/>
              <UserButton afterSignOutUrl='/'/>
             </div>

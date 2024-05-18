@@ -32,6 +32,9 @@ const config = {
         primaryGreen:{
           500:"#00925D"
         },
+        primaryHover:{
+          500:"#202020"
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

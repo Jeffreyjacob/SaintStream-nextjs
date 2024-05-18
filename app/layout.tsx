@@ -24,7 +24,9 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body className={recursive.className}>
-          {children}
+        <Provider>
+        {children}
+        </Provider>
         </body>
     </html>
     </ClerkProvider>

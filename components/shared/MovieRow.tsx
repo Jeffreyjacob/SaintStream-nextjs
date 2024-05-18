@@ -22,7 +22,6 @@ interface Props{
 }
 
 export default function MovieRow({Movies,loading,size,type}:Props) {
-    console.log(Movies)
   return (
     <>
       <Swiper

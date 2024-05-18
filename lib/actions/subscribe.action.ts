@@ -1,10 +1,12 @@
 "use server"
 
-import { CheckoutSubscribeParams, CreateSubscriberParams } from "@/constants/type";
+import { CheckoutSubscribeParams, CreateSubscriberParams, GetSubscribedUserParams } from "@/constants/type";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { connectToDatabase } from "../database";
 import Subscribe from "../database/models/subscribe.model";
+import Plan from "../database/models/plan.model";
+import User from "../database/models/user.model";
 
 
 export const CreateCheckoutOrder = async(subscribe:CheckoutSubscribeParams)=>{
@@ -50,5 +52,27 @@ export const CreateSubscriber = async(subscribe:CreateSubscriberParams)=>{
     }catch(error){
         console.log(error)
     throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
+    }
+}
+
+export const GetSubscribedUser = async(userId:string)=>{
+    try{
+      await connectToDatabase()
+      const newSubscriber = await Subscribe.find({user:userId});
+      if (newSubscriber.length > 0) {
+        return {
+          message: 'User is already subscribed',
+          data: JSON.parse(JSON.stringify(newSubscriber))
+        };
+      } else {
+        return {
+          message: 'User is not subscribed',
+          data: []
+        };
+      }
+
+    }catch(error){
+        console.log(error)
+        throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
     }
 }

@@ -47,27 +47,27 @@ export const getMovieGenre = (id: number) => {
 }
 
 export const SignInDefaultValue = {
-    email:"",
-    password:""
+    email: "",
+    password: ""
 }
 
 export const SignUpDefaultValue = {
-    email:"",
-    password:"",
-    confirmPassword:""
+    email: "",
+    password: "",
+    confirmPassword: ""
 }
 
-export interface CreateUserParam{
-    clerkId:string,
-    email:string,
-    firstName:string | null,
-    lastName:string | null,
-    photo:string,
+export interface CreateUserParam {
+    clerkId: string,
+    email: string,
+    firstName: string | null,
+    lastName: string | null,
+    photo: string,
 }
 
-export interface CreatePlanParam{
-    plantype:string,
-    Planprice:string,
+export interface CreatePlanParam {
+    plantype: string,
+    Planprice: string,
 }
 
 export type CheckoutSubscribeParams = {
@@ -77,10 +77,18 @@ export type CheckoutSubscribeParams = {
     buyerId: string
 }
 
-export interface CreateSubscriberParams{
+export interface CreateSubscriberParams {
     stripeId: string
     planId: string
     buyerId: string
     totalAmount: string
     createdAt: Date
+}
+export type GetSubscribedUserParams = {
+    _id: string,
+    stripeId: string,
+    totalAmount: string
+    user: string
+    plan: string
+    createAt: string
 }

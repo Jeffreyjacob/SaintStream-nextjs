@@ -8,9 +8,7 @@ const Layout = ({children}:{children:ReactNode}) => {
     <div>
         <Navbar/>
         <div className="flex flex-col min-h-full">
-        <Provider>
         {children}
-        </Provider>
         </div>
         <Toaster/>
     </div>
