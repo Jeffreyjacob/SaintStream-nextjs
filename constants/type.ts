@@ -97,14 +97,14 @@ export type SearchParamProps = {
 }
 
 
-export type MovieDetailParams = {
+export type MovieDetailType = {
     adult: boolean
     backdrop_path: string
-    belongs_to_collection:{ 
+    belongs_to_collection: {
         id: string,
-         name: string,
-          backdrop_path: string 
-        }
+        name: string,
+        backdrop_path: string
+    }
     budget: number
     genres: any[]
     homepage: string
@@ -130,6 +130,33 @@ export type MovieDetailParams = {
     vote_count: number
 }
 
+export type TopCastType = {
+    adult: boolean,
+    gender: number,
+    id: number,
+    known_for_department: string,
+    name: string,
+    original_name: string,
+    popularity: number,
+    profile_path: string,
+    cast_id: number,
+    character: string,
+    credit_id: string,
+    order: number
+}
 
-
+export type ReviewsType = {
+    author: string,
+    author_details: {
+        name: string,
+        username: string,
+        avatar_path: string | null,
+        rating: number
+    },
+    content: string,
+    created_at: string,
+    id: string,
+    updated_at: string,
+    url: string
+}
 
