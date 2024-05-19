@@ -30,7 +30,7 @@ const Hero = ({ Movies, loading }: HeroDetails) => {
                 pagination={{
                     clickable: true,
                 }}
-                modules={[Autoplay, Pagination]}
+                modules={[Autoplay]}
                 className="mySwiper"
             >
                 {Movies?.slice(0, 10)?.map((movie) => (
@@ -40,7 +40,7 @@ const Hero = ({ Movies, loading }: HeroDetails) => {
                             backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
                             backgroundPosition: "center",
                             backgroundSize: "cover",
-                            height:"450px"
+                            height:"500px"
                         }} >
                         <div className="absolute  inset-0 w-full flex flex-col justify-end pointer-events-none">
                             <div className="h-1/4 bg-gradient-to-t from-primary-500/100 to-transparent"></div>
