@@ -92,3 +92,6 @@ export type GetSubscribedUserParams = {
     plan: string
     createAt: string
 }
+export type SearchParamProps = {
+    params: { id: string }
+}

@@ -49,7 +49,7 @@ const MovieCard = ({ Movie, size, type }: Props) => {
       </div>
       <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:backdrop-blur-sm hover:opacity-100 rounded-xl">
         <SignedIn>
-        <Link href={type === "Movie" ? "/movieDetail" : "/seriesDetail"}>
+        <Link href={type === "Movie" ? `/moviedetail/${Movie.id}` : `/tvseriesdetail/${Movie.id}`}>
           <PlayCircleIcon className='w-14 h-14 text-primaryGreen-500'/>
         </Link>
         </SignedIn>

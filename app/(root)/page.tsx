@@ -36,6 +36,14 @@ export default function Home() {
         queryKey: ['TopRated'],
         queryFn: () => axios.get(`${baseUrl}/movie/top_rated?language=en-US&page=1`, { headers: headers })
     })
+    const {data:TvShow,isLoading:TvShowLoading} = useQuery({
+        queryKey:['AiringToday'],
+        queryFn:()=> axios.get(`${baseUrl}/tv/on_the_air?language=en-US&page=1`,{headers:headers})
+    })
+    const {data:RegularMovie,isLoading:RegularMovieLoading} = useQuery({
+        queryKey:['RegularMovie'],
+        queryFn:()=> axios.get(`${baseUrl}/movie/upcoming?language=en-US&page=2`,{headers:headers})
+    })
     const [selectTopRated, setSelectTopRated] = useState<getMovieType>()
     return (
         <main className=" bg-primary-500 text-white min-h-screen">
@@ -69,7 +77,7 @@ export default function Home() {
                             </div>
 
                             {/**Featured in saintStream today */}
-                            <div className=" relative py-16 h-[660px] md:h-[440px]"
+                            <div className=" relative py-16 h-[660px] lg:h-[440px]"
                                 style={{
                                     backgroundImage: `url(https://image.tmdb.org/t/p/original/${selectTopRated?.backdrop_path})`,
                                     backgroundPosition: "center",
@@ -79,12 +87,12 @@ export default function Home() {
                                     <div className="h-1/4 bg-gradient-to-b from-primary-500/100 to-transparent"></div>
                                     <div className="h-1/4 bg-gradient-to-t from-primary-500/100 to-transparent"></div>
                                 </div>
-                                <div className="py-4 px-5 md:px-10">
+                                <div className="py-4 px-5 lg:px-10">
                                     <h2 className="text-[19px] md:text-[25px] font-semibold ">Featured in SaintStream</h2>
                                     <p className=" font-light">Best Feature for you today</p>
                                 </div>
-                                <div className="flex flex-col-reverse md:flex-row w-full">
-                                    <div className="flex flex-col w-full h-fit md:w-1/2 items-start justify-start mt-8 md:mt-0 md:items-center px-5 md:px-10 relative">
+                                <div className="flex flex-col-reverse lg:flex-row w-full">
+                                    <div className="flex flex-col w-full h-fit lg:w-1/2 items-start justify-start mt-8 md:mt-0 md:items-center px-5 md:px-10 relative">
                                         <div className="flex flex-col gap-3">
                                             <h2 className="text-[19px] md:text-[30px]">{selectTopRated?.original_title}</h2>
                                             <p className="flex items-center gap-3 text-[12px]">
@@ -119,7 +127,7 @@ export default function Home() {
                                             </Button>
                                         </div>
                                     </div>
-                                    <div className="w-full pl-5 md:pl-10 md:w-1/2">
+                                    <div className="w-full pl-5 md:pl-10 lg:w-1/2">
                                         <FeaturedMovie Movies={TopRatedMovie?.data?.results}
                                             TopRatedChange={setSelectTopRated} Loading={TopRatedLoading} />
                                     </div>
@@ -127,8 +135,14 @@ export default function Home() {
                             </div>
 
                             {/**Movie */}
-                            <div className="mt-10">
-
+                            <div className="pl-5 md:pl-10 py-5 ">
+                            <h3 className="text-[19px] font-semibold my-6">Movies</h3>
+                            <MovieRow Movies={RegularMovie?.data?.results} type='Movie' loading={RegularMovieLoading} size={{width:260,height:200}} />
+                            </div>
+                              {/* *series*/}
+                              <div className="pl-5 md:pl-10 py-5 mb-16">
+                            <h3 className="text-[19px] font-semibold my-6">Series</h3>
+                            <MovieRow Movies={TvShow?.data?.results} type='Series' loading={TvShowLoading} size={{width:260,height:200}} />
                             </div>
                         </>
                     )

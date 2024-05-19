@@ -11,6 +11,7 @@ const CheckSub = ({id}:{id:string}) => {
      const { toast } = useToast()
     useEffect(()=>{
             const checkSubription = async()=>{
+              console.log(id)
                 try{
                    setTimeout(async()=>{
                     await GetSubscribedUser(id).then(
