@@ -160,3 +160,34 @@ export type ReviewsType = {
     url: string
 }
 
+export type EpisodeType = {
+    air_date: string
+    crew: any[]
+    episode_number: number
+    episode_type: string
+    guest_stars: any[]
+    id: number
+    name: string
+    overview: string
+    production_code: string
+    runtime: number
+    season_number: number
+    show_id: number
+    still_path: string
+    vote_average: number
+    vote_count: number
+}
+
+export type VideoType = {
+    iso_639_1: string,
+    iso_3166_1: string,
+    name: string,
+    key: string,
+    site: string
+    size: number,
+    type: string,
+    official: boolean,
+    published_at: string,
+    id: string
+}
+

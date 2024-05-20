@@ -3,7 +3,9 @@ import Loader from '@/components/shared/Loader'
 import MovieRow from '@/components/shared/MovieRow'
 import Review from '@/components/shared/Review'
 import Topcast from '@/components/shared/Topcast'
+import VideoPlayer from '@/components/shared/VideoPlayer'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import {  MovieDetailType, SearchParamProps, getMovieGenre } from '@/constants/type'
 import { cn } from '@/lib/utils'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
@@ -48,6 +50,7 @@ const page = ({ params: { id } }: SearchParamProps) => {
       
     const movie:MovieDetailType = MovieDetail?.data
     const [selectSection,setSelectSection] = useState("similar")
+    const [isDialogOpen, setDialogOpen] = useState(false);
     return (
         <div className='text-white'>
             {
@@ -84,10 +87,13 @@ const page = ({ params: { id } }: SearchParamProps) => {
                                 </div>
                                 <div className='flex w-full flex-row justify-start md:justify-between gap-4'>
                                     <div className='flex gap-3 mt-6 '>
-                                        <Button className='w-[137px] md:w-[215px] justify-start hover:bg-primaryGreen-500/85 h-[46px] flex bg-primaryGreen-500 text-white text-[14px] font-bold'>
-                                            <CirclePlay className='w-8 h-8 mx-3' />
-                                            Watch
-                                        </Button>
+                                    <Dialog>
+                                            <DialogTrigger className='w-[137px] md:w-[215px] justify-start hover:bg-primaryGreen-500/85 h-[46px] flex bg-primaryGreen-500 text-white text-[14px] font-bold rounded-lg items-center' onClick={()=>setDialogOpen(true)}>
+                                                <CirclePlay className='w-8 h-8 mx-3' />
+                                                Watch
+                                            </DialogTrigger>
+                                          <VideoPlayer id={id} type='movie' IsCLose={isDialogOpen} HandleClose={()=>setDialogOpen(false)}/>
+                                        </Dialog>
                                         <Button className='flex  bg-transparent border-2 border-white justify-start w-fit md:w-[180px] h-[46px] hover:text-black hover:bg-white/85'>
                                             <Bookmark className='w-5 h-5 md:h-8 md:w-8 md:mx-3' />
                                             <span className='hidden md:block'>
