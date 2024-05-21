@@ -9,10 +9,13 @@ import MobileNav from './MobileNav';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import { Search } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import SearchInputField from './SearchInputField';
 
 const Navbar = () => {
- const [scrolled,setScrolled] = useState(false)
-
+ const [scrolled,setScrolled] = useState(false);
+ const [ShowSearchBar, setShowSearchBar] = useState(false);
+ const [searchValue,setSearchValue] = useState("")
  
  useEffect(() => {
     const handleScroll = () => {
@@ -22,12 +25,18 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const router = useRouter()
+  const navigateToSearchPage = ()=>{
+    setShowSearchBar(false);
+    router.push(`/Search/${searchValue}`)
+  }
  
   return (
     <nav className={cn(" fixed z-10 inset-x-0 top-0 w-full shadow-xl text-white bg-primary-500/20 transition-all",{
      "bg-primary-500/5 backdrop-blur-lg":scrolled
     })}>
-      <div className='wrapper flex flex-row justify-between items-center '>
+      <div className='wrapper flex flex-row justify-between items-center relative'>
         <Link href='/'>
         <Image src={Logo} alt='logo'
         width={100} height={25} className=' object-contain'/>
@@ -37,18 +46,16 @@ const Navbar = () => {
             <NavItem/>
             </div>
             <div className='flex items-center lg:hidden'>
-            <Link href={'/Search'}>
-            <Search className='w-6 h-6 font-bold mr-4' />
-            </Link>
+            <Search className='w-6 h-6 font-bold mr-4 hover:cursor-pointer focus:cursor-pointer' 
+            onClick={()=>setShowSearchBar(prev => !prev)} />
             <UserButton afterSignOutUrl='/'/>
              <MobileNav/>
             </div>
         </div>
         <div className='hidden lg:block '>
           <div className='flex items-center gap-5'>
-          <Link href={'/Search'}>
-          <Search className='w-7 h-7' />
-          </Link>
+          <Search className='w-7 h-7 hover:cursor-pointer focus:cursor-pointer' 
+          onClick={()=>setShowSearchBar(prev => !prev)} />
             <SignedOut>
                 <div className='flex flex-row gap-5'>
                 <Button className=' bg-transparent border-[2px] border-white rounded-xl px-5 py-5 hover:bg-white/85 hover:text-black'>
@@ -67,6 +74,9 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {
+        ShowSearchBar && <SearchInputField HandleChange={setSearchValue} navigate={navigateToSearchPage}/>
+      }
     </nav>
   )
 }
