@@ -8,6 +8,7 @@ import NavItem from './NavItem';
 import MobileNav from './MobileNav';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { Button } from '../ui/button';
+import { Search } from 'lucide-react';
 
 const Navbar = () => {
  const [scrolled,setScrolled] = useState(false)
@@ -35,12 +36,19 @@ const Navbar = () => {
             <div className=' hidden lg:block'>
             <NavItem/>
             </div>
-            <div className='flex items-center lg:hidden '>
+            <div className='flex items-center lg:hidden'>
+            <Link href={'/Search'}>
+            <Search className='w-6 h-6 font-bold mr-4' />
+            </Link>
+            <UserButton afterSignOutUrl='/'/>
              <MobileNav/>
-             <UserButton afterSignOutUrl='/'/>
             </div>
         </div>
-        <div className='hidden lg:block'>
+        <div className='hidden lg:block '>
+          <div className='flex items-center gap-5'>
+          <Link href={'/Search'}>
+          <Search className='w-7 h-7' />
+          </Link>
             <SignedOut>
                 <div className='flex flex-row gap-5'>
                 <Button className=' bg-transparent border-[2px] border-white rounded-xl px-5 py-5 hover:bg-white/85 hover:text-black'>
@@ -52,8 +60,11 @@ const Navbar = () => {
                 </div>
             </SignedOut>
             <SignedIn>
+              <div className='flex gap-4'>
                  <UserButton afterSignOutUrl='/'/>
+              </div>
             </SignedIn>
+          </div>
         </div>
       </div>
     </nav>
