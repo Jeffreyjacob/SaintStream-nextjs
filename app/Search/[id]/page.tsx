@@ -61,7 +61,7 @@ const page = ({ params: { id } }: SearchParamProps) => {
                     {
                       SearchData?.map((movie) => (
                         <div key={movie.id}>
-                          <SearchCard Movie={movie} />
+                          <SearchCard Movie={movie}  placeholderImage={SearchData[0]?.backdrop_path}/>
                         </div>
                       ))
                     }

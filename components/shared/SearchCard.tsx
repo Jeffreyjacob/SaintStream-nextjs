@@ -4,17 +4,18 @@ import Link from 'next/link';
 import React from 'react';
 
 interface Props {
-    Movie: any
+    Movie: any,
+    placeholderImage:string
 }
 
-const SearchCard = ({ Movie }: Props) => {
+const SearchCard = ({ Movie,placeholderImage }: Props) => {
     return (
         <div>
             <Link href={Movie.media_type === "movie" ? `/moviedetail/${Movie.id}`:`/tvseriesdetail/${Movie.id}`}>
             {
-                Movie?.backdrop_path  && <div className='w-full md:w-[310px] h-[130px] relative rounded-lg my-4'
+                 <div className='w-full md:w-[310px] h-[130px] relative rounded-lg my-4'
                     style={{
-                        backgroundImage: `url(https://image.tmdb.org/t/p/original/${Movie.backdrop_path || Movie.poster_path})`,
+                        backgroundImage: `url(https://image.tmdb.org/t/p/original/${Movie.backdrop_path || Movie.poster_path || placeholderImage}) `,
                         backgroundSize: "cover"
                     }}>
                     <div className=' absolute z-10 inset-0 backdrop-blur-md rounded-lg h-full w-full' />
