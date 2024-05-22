@@ -22,7 +22,7 @@ export default function Home() {
     }
     const { data: TrendingMovies, isLoading } = useQuery({
         queryKey: ['Trending'],
-        queryFn: () => axois.get(`${baseUrl}/trending/all/day?language=en-US`, { headers: headers })
+        queryFn: () => axois.get(`${baseUrl}/trending/all/day?language=en-US`, { headers: headers }),
     })
     const { data: JustReleaseMovie, isLoading: JustReleaseLoading } = useQuery({
         queryKey: ['JustRelease'],

@@ -34,7 +34,7 @@ const Navbar = () => {
  
   return (
     <nav className={cn(" fixed z-10 inset-x-0 top-0 w-full shadow-xl text-white bg-primary-500/20 transition-all",{
-     "bg-primary-500/5 backdrop-blur-lg":scrolled
+     "backdrop-blur-lg":scrolled
     })}>
       <div className='wrapper flex flex-row justify-between items-center relative'>
         <Link href='/'>

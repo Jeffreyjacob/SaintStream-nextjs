@@ -191,3 +191,17 @@ export type VideoType = {
     id: string
 }
 
+export type SearchMovieType = {
+    backdrop_path: string,
+    id: number,
+    original_title:string
+    original_name: string,
+    overview: string,
+    poster_path: string,
+    media_type: string,
+    adult: boolean,
+    name: string,
+    original_language: string,
+    genre_ids: any[]
+}
+
